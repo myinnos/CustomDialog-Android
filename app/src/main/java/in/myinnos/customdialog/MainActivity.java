@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
                         .setContentPadding(10)
                         .setButtonText("Test")
                         .buttonVisibility(true)
+                        .setButtonColor(R.color.colorPrimaryDark)
                         .setIcon(R.drawable.close_circle, Icon.Visible, new CustomDialogListener() {
                             @Override
                             public void onClick(Dialog dialog, Boolean check) {

@@ -29,7 +29,7 @@ public class CustomAlertDialog {
     private in.myinnos.customdialogbox.Icon visibility;
     private in.myinnos.customdialogbox.CheckBox checkBoxVisibility;
     private CustomDialogListener listener, adListener, imgAdListener, desAdListener, buttonAdListener;
-    private int pBtnColor, color, bgColor;
+    private int pBtnColor, color, bgColor, btColor;
     private int titleFontSize, messageFontSize;
     private ImageView.ScaleType scaleType;
     private boolean cancel, buttonVisibility;
@@ -61,6 +61,7 @@ public class CustomAlertDialog {
         this.buttonVisibility = builder.buttonVisibility;
         this.buttonText = builder.buttonText;
         this.buttonAdListener = builder.buttonAdListener;
+        this.btColor = builder.btColor;
     }
 
     public static class Builder {
@@ -72,7 +73,7 @@ public class CustomAlertDialog {
         private in.myinnos.customdialogbox.Icon visibility;
         private in.myinnos.customdialogbox.CheckBox checkBoxVisibility;
         private CustomDialogListener listener, adListener, buttonAdListener;
-        private int pBtnColor, color, bgColor;
+        private int pBtnColor, color, bgColor, btColor;
         private int titleFontSize, messageFontSize;
         private float cardCornerRadius;
         private ImageView.ScaleType scaleType;
@@ -144,6 +145,11 @@ public class CustomAlertDialog {
             return this;
         }
 
+        public Builder setButtonColor(int btColor) {
+            this.btColor = btColor;
+            return this;
+        }
+
         public Builder setOnAdClickListener(CustomDialogListener adListener) {
             this.adListener = adListener;
             return this;
@@ -195,6 +201,10 @@ public class CustomAlertDialog {
                 btClick.setVisibility(View.VISIBLE);
             } else {
                 btClick.setVisibility(View.GONE);
+            }
+
+            if (btColor != 0) {
+                btClick.setBackgroundColor(btColor);
             }
 
             if (cardCornerRadius != 0) {
