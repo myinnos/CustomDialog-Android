@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">CustomDialogBox</string>
+    <string name="never_show_again">Never Show Again</string>
+</resources>
