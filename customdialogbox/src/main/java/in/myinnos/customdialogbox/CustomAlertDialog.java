@@ -28,11 +28,12 @@ public class CustomAlertDialog {
             titleTextColor, messageTextColor;
     private in.myinnos.customdialogbox.Icon visibility;
     private in.myinnos.customdialogbox.CheckBox checkBoxVisibility;
-    private CustomDialogListener listener, adListener, imgAdListener, desAdListener, buttonAdListener;
+    private CustomDialogListener listener, adListener, imgAdListener, desAdListener,
+            buttonAdListener, adShareListener;
     private int pBtnColor, color, bgColor, btColor;
     private int titleFontSize, messageFontSize;
     private ImageView.ScaleType scaleType;
-    private boolean cancel, buttonVisibility;
+    private boolean cancel, buttonVisibility, adShare;
     private float cardCornerRadius;
 
     private CustomAlertDialog(Builder builder) {
@@ -59,8 +60,10 @@ public class CustomAlertDialog {
         this.titleTextColor = builder.titleTextColor;
         this.messageTextColor = builder.messageTextColor;
         this.buttonVisibility = builder.buttonVisibility;
+        this.adShare = builder.adShare;
         this.buttonText = builder.buttonText;
-        this.buttonAdListener = builder.buttonAdListener;
+        this.buttonAdListener = builder.adShareListener;
+        this.adShareListener = adShareListener;
         this.btColor = builder.btColor;
     }
 
@@ -72,12 +75,12 @@ public class CustomAlertDialog {
                 titleTextColor, messageTextColor;
         private in.myinnos.customdialogbox.Icon visibility;
         private in.myinnos.customdialogbox.CheckBox checkBoxVisibility;
-        private CustomDialogListener listener, adListener, buttonAdListener;
+        private CustomDialogListener listener, adListener, buttonAdListener, adShareListener;
         private int pBtnColor, color, bgColor, btColor;
         private int titleFontSize, messageFontSize;
         private float cardCornerRadius;
         private ImageView.ScaleType scaleType;
-        private boolean cancel, buttonVisibility;
+        private boolean cancel, buttonVisibility, adShare;
 
         public Builder(Activity activity) {
             this.activity = activity;
@@ -134,6 +137,11 @@ public class CustomAlertDialog {
             return this;
         }
 
+        public Builder adShare(boolean adShare) {
+            this.adShare = adShare;
+            return this;
+        }
+
         public Builder setCheckBox(String checkBoxText, in.myinnos.customdialogbox.CheckBox checkBoxVisibility) {
             this.checkBoxText = checkBoxText;
             this.checkBoxVisibility = checkBoxVisibility;
@@ -160,6 +168,11 @@ public class CustomAlertDialog {
             return this;
         }
 
+        public Builder setOnAdShareListener(CustomDialogListener adShareListener) {
+            this.adShareListener = adShareListener;
+            return this;
+        }
+
         public Builder setContentPadding(int contentPadding) {
             this.contentPadding = contentPadding;
             return this;
@@ -170,9 +183,11 @@ public class CustomAlertDialog {
             return this;
         }
 
+
         public CustomAlertDialog show() {
             TextView txTitle, txMessage, txCheckBox;
             Button btClick;
+            LinearLayout adShareLayout;
             ImageView imgClose, imgAds;
             RelativeLayout rlCheckBox, rlMain;
             LinearLayout liMain;
@@ -186,6 +201,7 @@ public class CustomAlertDialog {
             dialog.setContentView(R.layout.act_alert_dialog);
             txTitle = dialog.findViewById(R.id.txTitle);
             txMessage = dialog.findViewById(R.id.txMessage);
+            adShareLayout = dialog.findViewById(R.id.adShareLayout);
             btClick = dialog.findViewById(R.id.btClick);
             txCheckBox = dialog.findViewById(R.id.txCheckBox);
             imgClose = dialog.findViewById(R.id.imgClose);
@@ -195,6 +211,12 @@ public class CustomAlertDialog {
             liMain = dialog.findViewById(R.id.liMain);
             rlMain = dialog.findViewById(R.id.rlMain);
             card_layout = dialog.findViewById(R.id.card_layout);
+
+            if (adShare) {
+                adShareLayout.setVisibility(View.VISIBLE);
+            } else {
+                adShareLayout.setVisibility(View.GONE);
+            }
 
             if (buttonVisibility) {
                 btClick.setText(buttonText);
@@ -281,6 +303,15 @@ public class CustomAlertDialog {
                     @Override
                     public void onClick(View v) {
                         buttonAdListener.onClick(dialog, true);
+                    }
+                });
+            }
+
+            if (adShareListener != null) {
+                adShareLayout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        adShareListener.onClick(dialog, true);
                     }
                 });
             }

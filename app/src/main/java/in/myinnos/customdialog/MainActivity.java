@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
                         .setContentPadding(10)
                         .setButtonText("Test")
                         .buttonVisibility(true)
+                        .adShare(true)
                         .setButtonColor(R.color.colorPrimaryDark)
                         .setIcon(R.drawable.close_circle, Icon.Visible, new CustomDialogListener() {
                             @Override
@@ -55,6 +56,12 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void onClick(Dialog dialog, Boolean check) {
 
+                            }
+                        })
+                        .setOnAdShareListener(new CustomDialogListener() {
+                            @Override
+                            public void onClick(Dialog dialog, Boolean check) {
+                                Toast.makeText(getApplicationContext(), "clicked", Toast.LENGTH_SHORT).show();
                             }
                         });
                 builder.show();
