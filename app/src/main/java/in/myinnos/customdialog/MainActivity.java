@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
                             }
                         })
+                        .setShareButtonText("Telegram")
                         .setOnAdShareListener(new CustomDialogListener() {
                             @Override
                             public void onClick(Dialog dialog, Boolean check) {

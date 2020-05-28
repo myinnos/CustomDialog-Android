@@ -22,7 +22,7 @@ import com.bumptech.glide.Glide;
 
 public class CustomAlertDialog {
     private String title, message, positiveBtnText, negativeBtnText,
-            imageUrl, checkBoxText, buttonText;
+            imageUrl, checkBoxText, buttonText, shareButtonText;
     private Activity activity;
     private int icon, contentPadding,
             titleTextColor, messageTextColor;
@@ -63,13 +63,14 @@ public class CustomAlertDialog {
         this.adShare = builder.adShare;
         this.buttonText = builder.buttonText;
         this.buttonAdListener = builder.adShareListener;
-        this.adShareListener = adShareListener;
+        this.adShareListener = builder.adShareListener;
+        this.shareButtonText = builder.shareButtonText;
         this.btColor = builder.btColor;
     }
 
     public static class Builder {
         private String title, message, positiveBtnText, negativeBtnText, imageUrl, checkBoxText,
-                buttonText;
+                buttonText, shareButtonText;
         private Activity activity;
         private int icon, contentPadding,
                 titleTextColor, messageTextColor;
@@ -84,6 +85,11 @@ public class CustomAlertDialog {
 
         public Builder(Activity activity) {
             this.activity = activity;
+        }
+
+        public Builder setShareButtonText(String shareButtonText) {
+            this.shareButtonText = shareButtonText;
+            return this;
         }
 
         public Builder setTitle(String title, int fontSize) {
@@ -185,7 +191,7 @@ public class CustomAlertDialog {
 
 
         public CustomAlertDialog show() {
-            TextView txTitle, txMessage, txCheckBox;
+            TextView txTitle, txMessage, txCheckBox, txShareButtonMessage;
             Button btClick;
             LinearLayout adShareLayout;
             ImageView imgClose, imgAds;
@@ -202,6 +208,7 @@ public class CustomAlertDialog {
             txTitle = dialog.findViewById(R.id.txTitle);
             txMessage = dialog.findViewById(R.id.txMessage);
             adShareLayout = dialog.findViewById(R.id.adShareLayout);
+            txShareButtonMessage = dialog.findViewById(R.id.txShareButtonMessage);
             btClick = dialog.findViewById(R.id.btClick);
             txCheckBox = dialog.findViewById(R.id.txCheckBox);
             imgClose = dialog.findViewById(R.id.imgClose);
@@ -307,6 +314,7 @@ public class CustomAlertDialog {
                 });
             }
 
+            txShareButtonMessage.setText(shareButtonText);
             if (adShareListener != null) {
                 adShareLayout.setOnClickListener(new View.OnClickListener() {
                     @Override
