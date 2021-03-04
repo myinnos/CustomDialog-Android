@@ -69,6 +69,18 @@
                         android:text=""
                         android:textStyle="normal" />
 
+                    <TextView
+                        android:id="@+id/txNote"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingLeft="16dp"
+                        android:paddingTop="5dp"
+                        android:paddingRight="10dp"
+                        android:paddingBottom="5dp"
+                        android:text=""
+                        android:textStyle="normal" />
+
                     <Button
                         android:id="@+id/btClick"
                         android:layout_width="match_parent"
@@ -87,8 +99,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:gravity="center"
+                    android:orientation="horizontal"
                     android:padding="10dp">
 
                     <RelativeLayout
@@ -115,13 +127,13 @@
                     <LinearLayout
                         android:id="@+id/adShareLayout"
                         android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:padding="5dp"
-                        android:layout_height="wrap_content">
+                        android:padding="5dp">
 
                         <ImageView
+                            android:id="@+id/imgDialogShare"
                             android:layout_width="wrap_content"
-                            android:src="@drawable/whatsapp"
                             android:layout_height="wrap_content" />
 
                         <TextView
@@ -129,8 +141,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="3dp"
-                            android:textStyle="bold"
-                            android:text="WhatsApp" />
+                            android:text="WhatsApp"
+                            android:textStyle="bold" />
                     </LinearLayout>
 
                 </LinearLayout>

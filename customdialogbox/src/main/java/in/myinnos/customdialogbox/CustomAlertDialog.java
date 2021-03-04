@@ -21,17 +21,17 @@ import com.bumptech.glide.Glide;
 
 
 public class CustomAlertDialog {
-    private String title, message, positiveBtnText, negativeBtnText,
+    private String title, message, note, positiveBtnText, negativeBtnText,
             imageUrl, checkBoxText, buttonText, shareButtonText;
     private Activity activity;
     private int icon, contentPadding,
-            titleTextColor, messageTextColor;
+            titleTextColor, messageTextColor, noteTextColor;
     private in.myinnos.customdialogbox.Icon visibility;
     private in.myinnos.customdialogbox.CheckBox checkBoxVisibility;
     private CustomDialogListener listener, adListener, imgAdListener, desAdListener,
             buttonAdListener, adShareListener;
     private int pBtnColor, color, bgColor, btColor;
-    private int titleFontSize, messageFontSize;
+    private int titleFontSize, messageFontSize, noteFontSize;
     private ImageView.ScaleType scaleType;
     private boolean cancel, buttonVisibility, adShare;
     private float cardCornerRadius;
@@ -39,6 +39,7 @@ public class CustomAlertDialog {
     private CustomAlertDialog(Builder builder) {
         this.title = builder.title;
         this.message = builder.message;
+        this.note = builder.note;
         this.activity = builder.activity;
         this.icon = builder.icon;
         this.visibility = builder.visibility;
@@ -51,6 +52,7 @@ public class CustomAlertDialog {
         this.cancel = builder.cancel;
         this.titleFontSize = builder.titleFontSize;
         this.messageFontSize = builder.messageFontSize;
+        this.noteFontSize = builder.noteFontSize;
         this.scaleType = builder.scaleType;
         this.adListener = builder.adListener;
         this.checkBoxVisibility = builder.checkBoxVisibility;
@@ -59,6 +61,7 @@ public class CustomAlertDialog {
         this.contentPadding = builder.contentPadding;
         this.titleTextColor = builder.titleTextColor;
         this.messageTextColor = builder.messageTextColor;
+        this.noteTextColor = builder.noteTextColor;
         this.buttonVisibility = builder.buttonVisibility;
         this.adShare = builder.adShare;
         this.buttonText = builder.buttonText;
@@ -69,16 +72,16 @@ public class CustomAlertDialog {
     }
 
     public static class Builder {
-        private String title, message, positiveBtnText, negativeBtnText, imageUrl, checkBoxText,
+        private String title, message, note, positiveBtnText, negativeBtnText, imageUrl, checkBoxText,
                 buttonText, shareButtonText;
         private Activity activity;
         private int icon, contentPadding,
-                titleTextColor, messageTextColor;
+                titleTextColor, messageTextColor, noteTextColor;
         private in.myinnos.customdialogbox.Icon visibility;
         private in.myinnos.customdialogbox.CheckBox checkBoxVisibility;
         private CustomDialogListener listener, adListener, buttonAdListener, adShareListener;
         private int pBtnColor, color, bgColor, btColor;
-        private int titleFontSize, messageFontSize;
+        private int titleFontSize, messageFontSize, noteFontSize;
         private float cardCornerRadius;
         private ImageView.ScaleType scaleType;
         private boolean cancel, buttonVisibility, adShare;
@@ -114,6 +117,17 @@ public class CustomAlertDialog {
             return this;
         }
 
+        public Builder setNoteMessage(String note, int fontSize) {
+            this.note = note;
+            this.noteFontSize = fontSize;
+            return this;
+        }
+
+        public Builder setNoteMessageColor(int noteTextColor) {
+            this.noteTextColor = noteTextColor;
+            return this;
+        }
+
         public Builder setButtonText(String buttonText) {
             this.buttonText = buttonText;
             return this;
@@ -127,6 +141,14 @@ public class CustomAlertDialog {
 
         //setIcon
         public Builder setIcon(int icon, Icon visibility, CustomDialogListener listener) {
+            this.icon = icon;
+            this.visibility = visibility;
+            this.listener = listener;
+            return this;
+        }
+
+        //setShareIcon
+        public Builder setShareIcon(int icon, Icon visibility, CustomDialogListener listener) {
             this.icon = icon;
             this.visibility = visibility;
             this.listener = listener;
@@ -191,10 +213,10 @@ public class CustomAlertDialog {
 
 
         public CustomAlertDialog show() {
-            TextView txTitle, txMessage, txCheckBox, txShareButtonMessage;
+            TextView txTitle, txMessage, txNote, txCheckBox, txShareButtonMessage;
             Button btClick;
             LinearLayout adShareLayout;
-            ImageView imgClose, imgAds;
+            ImageView imgClose, imgDialogShare, imgAds;
             RelativeLayout rlCheckBox, rlMain;
             LinearLayout liMain;
             CardView card_layout;
@@ -207,11 +229,13 @@ public class CustomAlertDialog {
             dialog.setContentView(R.layout.act_alert_dialog);
             txTitle = dialog.findViewById(R.id.txTitle);
             txMessage = dialog.findViewById(R.id.txMessage);
+            txNote = dialog.findViewById(R.id.txNote);
             adShareLayout = dialog.findViewById(R.id.adShareLayout);
             txShareButtonMessage = dialog.findViewById(R.id.txShareButtonMessage);
             btClick = dialog.findViewById(R.id.btClick);
             txCheckBox = dialog.findViewById(R.id.txCheckBox);
             imgClose = dialog.findViewById(R.id.imgClose);
+            imgDialogShare = dialog.findViewById(R.id.imgDialogShare);
             imgAds = dialog.findViewById(R.id.imgAds);
             checkbox = dialog.findViewById(R.id.checkbox);
             rlCheckBox = dialog.findViewById(R.id.rlCheckBox);
@@ -265,11 +289,27 @@ public class CustomAlertDialog {
                 txMessage.setTextColor(messageTextColor);
             }
 
+            txNote.setText(Html.fromHtml(message));
+            if (messageFontSize != 0) {
+                txNote.setTextSize(TypedValue.COMPLEX_UNIT_SP, messageFontSize);
+            } else {
+                txNote.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
+            }
+            if (messageTextColor != 0) {
+                txNote.setTextColor(messageTextColor);
+            }
+
             imgClose.setBackgroundDrawable(ContextCompat.getDrawable(activity, icon));
             if (visibility == Icon.Visible) {
                 imgClose.setVisibility(View.VISIBLE);
             } else {
                 imgClose.setVisibility(View.GONE);
+            }
+            imgDialogShare.setBackgroundDrawable(ContextCompat.getDrawable(activity, icon));
+            if (visibility == Icon.Visible) {
+                imgDialogShare.setVisibility(View.VISIBLE);
+            } else {
+                imgDialogShare.setVisibility(View.GONE);
             }
             if (imageUrl != null) {
                 imgAds.setVisibility(View.VISIBLE);
