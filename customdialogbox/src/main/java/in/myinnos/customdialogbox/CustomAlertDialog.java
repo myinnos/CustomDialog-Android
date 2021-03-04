@@ -75,7 +75,7 @@ public class CustomAlertDialog {
         private String title, message, note, positiveBtnText, negativeBtnText, imageUrl, checkBoxText,
                 buttonText, shareButtonText;
         private Activity activity;
-        private int icon, contentPadding,
+        private int icon, shareIcon, contentPadding,
                 titleTextColor, messageTextColor, noteTextColor;
         private in.myinnos.customdialogbox.Icon visibility;
         private in.myinnos.customdialogbox.CheckBox checkBoxVisibility;
@@ -148,8 +148,8 @@ public class CustomAlertDialog {
         }
 
         //setShareIcon
-        public Builder setShareIcon(int icon, Icon visibility, CustomDialogListener listener) {
-            this.icon = icon;
+        public Builder setShareIcon(int shareIcon, Icon visibility, CustomDialogListener listener) {
+            this.shareIcon = shareIcon;
             this.visibility = visibility;
             this.listener = listener;
             return this;
@@ -305,7 +305,7 @@ public class CustomAlertDialog {
             } else {
                 imgClose.setVisibility(View.GONE);
             }
-            imgDialogShare.setBackgroundDrawable(ContextCompat.getDrawable(activity, icon));
+            imgDialogShare.setBackgroundDrawable(ContextCompat.getDrawable(activity, shareIcon));
             if (visibility == Icon.Visible) {
                 imgDialogShare.setVisibility(View.VISIBLE);
             } else {

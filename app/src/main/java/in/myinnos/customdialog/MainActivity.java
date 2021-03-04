@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                         })
                         // temp solution
-                        .setShareIcon(R.drawable.close_circle, Icon.Visible, new CustomDialogListener() {
+                        .setShareIcon(R.drawable.ic_close_black, Icon.Visible, new CustomDialogListener() {
                             @Override
                             public void onClick(Dialog dialog, Boolean check) {
                                 dialog.dismiss();
