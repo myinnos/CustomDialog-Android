@@ -77,7 +77,6 @@
                         android:paddingLeft="16dp"
                         android:paddingTop="5dp"
                         android:paddingRight="10dp"
-                        android:paddingBottom="5dp"
                         android:text=""
                         android:textStyle="normal" />
 
