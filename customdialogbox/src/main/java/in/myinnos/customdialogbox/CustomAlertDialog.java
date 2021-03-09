@@ -308,11 +308,15 @@ public class CustomAlertDialog {
             } else {
                 imgClose.setVisibility(View.GONE);
             }
-            imgDialogShare.setBackgroundDrawable(ContextCompat.getDrawable(activity, shareIcon));
-            if (visibility == Icon.Visible) {
-                imgDialogShare.setVisibility(View.VISIBLE);
-            } else {
-                imgDialogShare.setVisibility(View.GONE);
+            try{
+                imgDialogShare.setBackgroundDrawable(ContextCompat.getDrawable(activity, shareIcon));
+                if (visibility == Icon.Visible) {
+                    imgDialogShare.setVisibility(View.VISIBLE);
+                } else {
+                    imgDialogShare.setVisibility(View.GONE);
+                }
+            }catch (Exception ignored){
+
             }
             if (imageUrl != null) {
                 imgAds.setVisibility(View.VISIBLE);
