@@ -289,14 +289,17 @@ public class CustomAlertDialog {
                 txMessage.setTextColor(messageTextColor);
             }
 
-            txNote.setText(Html.fromHtml(note));
-            if (noteFontSize != 0) {
-                txNote.setTextSize(TypedValue.COMPLEX_UNIT_SP, noteFontSize);
-            } else {
-                txNote.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
-            }
-            if (noteTextColor != 0) {
-                txNote.setTextColor(noteTextColor);
+            if (note != null) {
+                txNote.setText(Html.fromHtml(note));
+
+                if (noteFontSize != 0) {
+                    txNote.setTextSize(TypedValue.COMPLEX_UNIT_SP, noteFontSize);
+                } else {
+                    txNote.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
+                }
+                if (noteTextColor != 0) {
+                    txNote.setTextColor(noteTextColor);
+                }
             }
 
             imgClose.setBackgroundDrawable(ContextCompat.getDrawable(activity, icon));
